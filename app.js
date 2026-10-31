@@ -96,11 +96,11 @@ function renderTodos() {
 // 這個函式會依照篩選狀態，回傳對應的空白提示文字。
 function getEmptyMessage() {
   if (currentFilter === 'active') {
-    return '目前沒有未完成的待辦事項';
+    return '目前沒有未完成的待辦事項。若剛勾選完成，該項目只是被移出未完成篩選，尚未被刪除。';
   }
 
   if (currentFilter === 'completed') {
-    return '目前沒有已完成的待辦事項';
+    return '目前沒有已完成的待辦事項。若剛取消勾選，該項目只是被移出已完成篩選，尚未被刪除。';
   }
 
   return '還沒有任何待辦事項,新增一個吧!';
