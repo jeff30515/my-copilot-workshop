@@ -13,6 +13,7 @@ const themeToggle = document.querySelector('#theme-toggle');
 const themeIcon = document.querySelector('.theme-icon');
 const themeText = document.querySelector('.theme-text');
 const filterButtons = document.querySelectorAll('.filter-btn');
+const clearCompletedBtn = document.querySelector('#clear-completed');
 
 // 先從 localStorage 讀取已存在的待辦資料與主題設定。
 let todos = loadTodos();
@@ -91,6 +92,7 @@ function renderTodos() {
 
   const activeCount = todos.filter((todo) => !todo.completed).length;
   todoCount.textContent = `未完成: ${activeCount} 項`;
+  updateClearCompletedButton();
 }
 
 // 這個函式會依照篩選狀態，回傳對應的空白提示文字。
@@ -188,6 +190,33 @@ filterButtons.forEach((button) => {
     renderTodos();
   });
 });
+
+// 這個函式會處理「清除已完成」按鈕點選事件。
+clearCompletedBtn.addEventListener('click', clearCompletedTodos);
+
+// 這個函式會在每次渲染時同步更新清除已完成按鈕狀態。
+function updateClearCompletedButton() {
+  const hasCompletedTodos = todos.some((todo) => todo.completed);
+  clearCompletedBtn.disabled = !hasCompletedTodos;
+  clearCompletedBtn.hidden = !hasCompletedTodos;
+}
+
+// 這個函式會刪除所有已完成的項目，並在刪除前要求使用者確認。
+function clearCompletedTodos() {
+  const completedTodos = todos.filter((todo) => todo.completed);
+  if (completedTodos.length === 0) {
+    return;
+  }
+
+  const confirmed = window.confirm('確定要清除所有已完成的待辦事項嗎？');
+  if (!confirmed) {
+    return;
+  }
+
+  todos = todos.filter((todo) => !todo.completed);
+  saveTodos();
+  renderTodos();
+}
 
 // 新增待辦事項，並忽略空白輸入。
 todoForm.addEventListener('submit', (event) => {
