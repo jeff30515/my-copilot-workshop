@@ -1,0 +1,240 @@
+:root {
+  --bg-color: #f4f7fb;
+  --card-color: #ffffff;
+  --primary-color: #4f7cff;
+  --primary-dark: #3c67eb;
+  --border-color: #e5e9f2;
+  --text-color: #1f2937;
+  --muted-color: #6b7280;
+  --danger-color: #ef4444;
+  --danger-soft: #fee2e2;
+  --success-color: #22c55e;
+  --shadow-soft: 0 10px 30px rgba(15, 23, 42, 0.08);
+  --input-bg: #f9fafb;
+  --completed-color: #9ca3af;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  font-family: "Segoe UI", "Microsoft JhengHei", sans-serif;
+  background: linear-gradient(180deg, #edf3ff 0%, var(--bg-color) 100%);
+  color: var(--text-color);
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+}
+
+.app-shell {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.todo-card {
+  width: min(100%, 520px);
+  background: var(--card-color);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  box-shadow: var(--shadow-soft);
+  padding: 24px 20px 18px;
+}
+
+.todo-header h1 {
+  margin: 0 0 20px;
+  font-size: clamp(1.7rem, 3vw, 2.2rem);
+  text-align: center;
+  letter-spacing: 0.04em;
+}
+
+.todo-form {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.todo-form input {
+  flex: 1;
+  min-width: 0;
+  height: 48px;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  background: var(--input-bg);
+  padding: 0 14px;
+  font-size: 1rem;
+  color: var(--text-color);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.todo-form input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(79, 124, 255, 0.15);
+}
+
+.add-btn {
+  border: none;
+  border-radius: 12px;
+  background: var(--primary-color);
+  color: #fff;
+  padding: 0 18px;
+  min-width: 86px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.add-btn:hover {
+  background: var(--primary-dark);
+}
+
+.add-btn:active {
+  transform: translateY(1px);
+}
+
+.todo-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  background: #fff;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.todo-item:hover {
+  border-color: #d5def5;
+  background: #fafcff;
+}
+
+.todo-main {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+.todo-checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--success-color);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.todo-text {
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--text-color);
+  transition: color 0.2s ease, text-decoration 0.2s ease, opacity 0.2s ease;
+}
+
+.todo-item.completed .todo-text {
+  color: var(--completed-color);
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+.delete-btn {
+  border: none;
+  border-radius: 10px;
+  background: var(--danger-soft);
+  color: var(--danger-color);
+  font-weight: 700;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.delete-btn:hover {
+  background: #fecaca;
+}
+
+.delete-btn:active {
+  transform: scale(0.97);
+}
+
+.empty-state {
+  margin: 18px 0 0;
+  text-align: center;
+  color: var(--muted-color);
+  font-size: 0.98rem;
+  line-height: 1.6;
+  padding: 10px 8px;
+}
+
+.todo-footer {
+  margin-top: 18px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-color);
+  text-align: right;
+  color: var(--muted-color);
+  font-size: 0.95rem;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 420px) {
+  .todo-card {
+    padding: 20px 14px 16px;
+    border-radius: 16px;
+  }
+
+  .todo-form {
+    flex-direction: column;
+  }
+
+  .add-btn {
+    width: 100%;
+    height: 46px;
+  }
+
+  .todo-item {
+    padding: 10px 8px;
+  }
+
+  .todo-main {
+    gap: 8px;
+  }
+
+  .delete-btn {
+    width: 32px;
+    height: 32px;
+  }
+}
